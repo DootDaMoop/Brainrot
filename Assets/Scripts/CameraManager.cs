@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public float swayAmount = 0.1f;
-    public float swaySpeed = 1f;
+    public float SwayAmount = 0.1f;
+    public float SwaySpeed = 1f;
+    public float SwayMultiplier = 5f;
     public Vector3 StartingPosition;
 
     private void Start() {
@@ -13,13 +14,13 @@ public class CameraManager : MonoBehaviour
     }
 
     private void Update() {
-        float swayX = Mathf.Sin(Time.time*swaySpeed) * swayAmount;
-        float swayY = Mathf.Sin(Time.time*swaySpeed * 0.5f) * swayAmount;
+        float swayX = Mathf.Sin(Time.time*SwaySpeed * SwayMultiplier) * SwayAmount;
+        float swayY = Mathf.Sin(Time.time*SwaySpeed * 0.5f * SwayMultiplier) * SwayAmount;
 
         if(StudySceneManager.instance.attentionSpanManager.CurrentAttentionSpan < 80) {
-            transform.localPosition = new Vector3(swayX,swayY, 0f);
+            transform.position = new Vector3(swayX,swayY, 0f);
         } else {
-            transform.localPosition = StartingPosition;
+            transform.position = StartingPosition;
         }
         
     }
