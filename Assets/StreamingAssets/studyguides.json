@@ -1,0 +1,15 @@
+{
+    "StudyGuideVersion": 1,
+    "questions": [
+        {
+            "QuestionText": "Question: Test Question",
+            "Answers": ["WRONG", "WRONG", "RIGHT"],
+            "CorrectAnswer": 2
+        },
+        {
+            "QuestionText": "Question: BALLS",
+            "Answers": ["FRALLS", "BALLS", "NAHHH"],
+            "CorrectAnswer":1
+        }
+    ]
+}
