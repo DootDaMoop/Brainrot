@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: {fileID: 5657856024456284620}
   toggleGroup: {fileID: 5263681528267515321}
+  CorrectAnswerIndex: 0
 --- !u!1 &5329965561986251110
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowSwitchOff: 0
+  m_AllowSwitchOff: 1
 --- !u!1 &6290792638518819160
 GameObject:
   m_ObjectHideFlags: 0
