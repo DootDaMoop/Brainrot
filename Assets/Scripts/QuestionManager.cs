@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour {
+    [Header("Question Settings")]
     public GameObject QuestionPrefab;
     public GameObject QuestionGrid;
     public ToggleGroup AnswerToggleGroup;
@@ -16,8 +17,11 @@ public class QuestionManager : MonoBehaviour {
     public int QuestionsPerPage = 3;
     public int CurrentPageIndex = 1;
     public int TotalPages;
+    
+    [Header("Buttons")]
     public Button NextPageButton;
     public Button PrevPageButton;
+    public Button SubmitButton;
 
     private void Start() {
         string path = Path.Combine(Application.streamingAssetsPath, file);
@@ -26,12 +30,14 @@ public class QuestionManager : MonoBehaviour {
             QuestionData questionData = JsonUtility.FromJson<QuestionData>(json);
             TotalPages = Mathf.CeilToInt(questionData.questions.Count / QuestionsPerPage);
 
+            int QuestionNum = 1;
             foreach(Question question in questionData.questions) {
-                Debug.Log($"Index: 1");
+                //Debug.Log($"Index: ");
+                
                 //Question question = questionData.questions[i];
                 GameObject NewQuestion = Instantiate(QuestionPrefab, QuestionGrid.transform.position, Quaternion.identity, QuestionGrid.transform);
                 QuestionEntry questionEntry = NewQuestion.GetComponent<QuestionEntry>();
-                questionEntry.SetQuestiontext($"1. {question.QuestionText}");
+                questionEntry.SetQuestiontext($"{QuestionNum}. {question.QuestionText}");
                 AnswerToggleGroup = questionEntry.GetToggleGroup();
 
                 // Creates Answer Choices for Question
@@ -44,39 +50,34 @@ public class QuestionManager : MonoBehaviour {
                     AnswerToggle.GetComponent<RectTransform>().anchoredPosition = new Vector3(-170,pos,0);
                     pos -= 35;
                 }
-            questionEntry.SetCorrectAnswerIndex(question.CorrectAnswer); 
-        }
+                questionEntry.SetCorrectAnswerIndex(question.CorrectAnswer);
+                QuestionNum++;
+            }
 
-        LoadQuestions();
-
+            LoadQuestions();
         }
     }
 
     public void LoadQuestions() {
-        string path = Path.Combine(Application.streamingAssetsPath, file);
-        if(File.Exists(path)) {
-            string json = File.ReadAllText(path);
-            QuestionData questionData = JsonUtility.FromJson<QuestionData>(json);
-            TotalPages = Mathf.CeilToInt(questionData.questions.Count / QuestionsPerPage);
-
-            // Hides all previous page questions (Destroying will make answers unsaved)
-            foreach(Transform question in QuestionGrid.transform) {
-                question.gameObject.SetActive(false);
-            }
-
-            // Enable or Disable Page Turn Buttons based on if at first or last page.
-            if(CurrentPageIndex == 0) {
-                PrevPageButton.gameObject.SetActive(false);
-            }
-            else if(CurrentPageIndex == TotalPages) {
-                NextPageButton.gameObject.SetActive(false);
-            } else {
-                NextPageButton.gameObject.SetActive(true);
-                PrevPageButton.gameObject.SetActive(true);
-            }
-
-            LoadPage(CurrentPageIndex);
+        // Hides all previous page questions (Destroying will make answers unsaved)
+        foreach(Transform child in QuestionGrid.transform) {
+            child.gameObject.SetActive(false);
         }
+
+        // Enable or Disable Page Turn Buttons based on if at first or last page.
+        if(CurrentPageIndex == 0) {
+            PrevPageButton.gameObject.SetActive(false);
+        }
+        else if(CurrentPageIndex == TotalPages) {
+            NextPageButton.gameObject.SetActive(false);
+            SubmitButton.gameObject.SetActive(true);
+        } else {
+            NextPageButton.gameObject.SetActive(true);
+            PrevPageButton.gameObject.SetActive(true);
+            SubmitButton.gameObject.SetActive(false);
+        }
+        
+        LoadPage(CurrentPageIndex);
     }
 
     // Enable or Disable questions based on Current Page
@@ -89,6 +90,21 @@ public class QuestionManager : MonoBehaviour {
                 QuestionGrid.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+    }
+
+    public void SubmitAnswers() {
+        int CorrectAnswerCounter = 0;
+
+        foreach(Transform question in QuestionGrid.transform) {
+            QuestionEntry questionEntry = question.GetComponent<QuestionEntry>();
+
+            if(questionEntry.IsCorrectAnswer()) {
+                CorrectAnswerCounter++;
+            }
+        }
+        
+        float Grade = (float)CorrectAnswerCounter / QuestionGrid.transform.childCount;
+        Debug.Log($"Grade: {Grade}% | {CorrectAnswerCounter} correct answers.");
     }
 
     #region Page Functions
