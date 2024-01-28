@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,36 @@ public class QuestionManager : MonoBehaviour {
     public Button PrevPageButton;
 
     private void Start() {
+        string path = Path.Combine(Application.streamingAssetsPath, file);
+        if(File.Exists(path)) {
+            string json = File.ReadAllText(path);
+            QuestionData questionData = JsonUtility.FromJson<QuestionData>(json);
+            TotalPages = Mathf.CeilToInt(questionData.questions.Count / QuestionsPerPage);
+
+            foreach(Question question in questionData.questions) {
+                Debug.Log($"Index: 1");
+                //Question question = questionData.questions[i];
+                GameObject NewQuestion = Instantiate(QuestionPrefab, QuestionGrid.transform.position, Quaternion.identity, QuestionGrid.transform);
+                QuestionEntry questionEntry = NewQuestion.GetComponent<QuestionEntry>();
+                questionEntry.SetQuestiontext($"1. {question.QuestionText}");
+                AnswerToggleGroup = questionEntry.GetToggleGroup();
+
+                // Creates Answer Choices for Question
+                float pos = 30;
+                foreach(string answer in question.Answers) {
+                    Toggle AnswerToggle = Instantiate(AnswerTogglePrefab, AnswerToggleGroup.transform);
+                    AnswerToggle.GetComponentInChildren<Text>().text = answer;
+                    AnswerToggle.group = AnswerToggleGroup;
+                    AnswerToggle.isOn = false;
+                    AnswerToggle.GetComponent<RectTransform>().anchoredPosition = new Vector3(-170,pos,0);
+                    pos -= 35;
+                }
+            questionEntry.SetCorrectAnswerIndex(question.CorrectAnswer); 
+        }
+
         LoadQuestions();
+
+        }
     }
 
     public void LoadQuestions() {
@@ -32,11 +59,12 @@ public class QuestionManager : MonoBehaviour {
             QuestionData questionData = JsonUtility.FromJson<QuestionData>(json);
             TotalPages = Mathf.CeilToInt(questionData.questions.Count / QuestionsPerPage);
 
-            // Reset Questions
+            // Hides all previous page questions (Destroying will make answers unsaved)
             foreach(Transform question in QuestionGrid.transform) {
-                Destroy(question.gameObject);
+                question.gameObject.SetActive(false);
             }
 
+            // Enable or Disable Page Turn Buttons based on if at first or last page.
             if(CurrentPageIndex == 0) {
                 PrevPageButton.gameObject.SetActive(false);
             }
@@ -47,40 +75,23 @@ public class QuestionManager : MonoBehaviour {
                 PrevPageButton.gameObject.SetActive(true);
             }
 
-            LoadPage(CurrentPageIndex,questionData);
+            LoadPage(CurrentPageIndex);
         }
     }
 
-    public void LoadPage(int page, QuestionData questionData) {
-        
-        // Index Variables
-        int StartIndex = page * QuestionsPerPage;
-        int EndIndex = Mathf.Min(StartIndex + QuestionsPerPage, questionData.questions.Count);
-
-        for(int i = StartIndex; i < EndIndex; i++) {
-            Debug.Log($"Index: {i}");
-            Question question = questionData.questions[i];
-            GameObject NewQuestion = Instantiate(QuestionPrefab, QuestionGrid.transform.position, Quaternion.identity, QuestionGrid.transform);
-            QuestionEntry questionEntry = NewQuestion.GetComponent<QuestionEntry>();
-            questionEntry.SetQuestiontext($"{i+1}. {question.QuestionText}");
-            AnswerToggleGroup = questionEntry.GetToggleGroup();
-            
-            // Creates Answer Choices for Question
-            float pos = 30;
-            foreach(string answer in question.Answers) {
-                Toggle AnswerToggle = Instantiate(AnswerTogglePrefab, AnswerToggleGroup.transform);
-                AnswerToggle.GetComponentInChildren<Text>().text = answer;
-                AnswerToggle.group = AnswerToggleGroup;
-                AnswerToggle.isOn = false;
-                AnswerToggle.GetComponent<RectTransform>().anchoredPosition = new Vector3(-170,pos,0);
-                pos -= 35;
+    // Enable or Disable questions based on Current Page
+    public void LoadPage(int page) {
+        for(int i = 0; i < QuestionGrid.transform.childCount; i++) {
+            if(i >= page * QuestionsPerPage && i < (page+1) * QuestionsPerPage) {
+                QuestionGrid.transform.GetChild(i).gameObject.SetActive(true);
             }
-            questionEntry.SetCorrectAnswerIndex(question.CorrectAnswer);
-            
+            else {
+                QuestionGrid.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 
-    // Page Functions
+    #region Page Functions
     public void NextPage() {
         if(CurrentPageIndex < TotalPages) {
             CurrentPageIndex++;
@@ -94,6 +105,8 @@ public class QuestionManager : MonoBehaviour {
             LoadQuestions();
         }
     }
+    #endregion
+
 }
 
 [Serializable]
