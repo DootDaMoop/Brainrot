@@ -105,6 +105,11 @@ public class QuestionManager : MonoBehaviour {
         
         float Grade = (float)CorrectAnswerCounter / QuestionGrid.transform.childCount;
         Debug.Log($"Grade: {Grade}% | {CorrectAnswerCounter} correct answers.");
+        if(Grade > 0.7) {
+            StudySceneManager.instance.sceneSwitcher.GoScene("GoodEnd");
+        }  else {
+            StudySceneManager.instance.sceneSwitcher.GoScene("End");
+        }      
     }
 
     #region Page Functions

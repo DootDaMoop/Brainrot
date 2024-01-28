@@ -2,23 +2,108 @@
     "StudyGuideVersion": 1,
     "questions": [
         {
-            "QuestionText": "What's Jason's favorite foog.",
+            "QuestionText": "What's Jason's favorite food?",
             "Answers": ["Erm, Food*", "Sushi", "He doesn't know.","Khao Piak Sen"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "What is the third color of the rainbow?",
+            "Answers": ["Yellow", "Orange", "Green","Indigo"],
+            "CorrectAnswer": 0
+        },
+        {
+            "QuestionText": "10 % 4",
+            "Answers": ["0", "4", "2","1"],
             "CorrectAnswer": 2
         },
         {
-            "QuestionText": "What's Jason's favorite foog.",
-            "Answers": ["Erm, Food*", "Sushi", "He doesn't know.","Khao Piak Sen"],
+            "QuestionText": "What element does Hg stand for?",
+            "Answers": ["Helium", "Cadmium", "Iron","Mercury"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "What is the explosion at the end of a stars lifecycle called?",
+            "Answers": ["Sonic Inflation", "Sonic Boom", "Supernova","The Big Bang"],
             "CorrectAnswer": 2
         },
         {
-            "QuestionText": "What's Jason's favorite foog.",
-            "Answers": ["Erm, Food*", "Sushi", "He doesn't know.","Khao Piak Sen"],
+            "QuestionText": "What do spelunkers explore?",
+            "Answers": ["Caves", "The Ocean", "Volcanoes","Abandoned Buildings"],
+            "CorrectAnswer": 0
+        },
+        {
+            "QuestionText": "What color is the sky?",
+            "Answers": ["Pink", "Grey with smog", "Yellow", "Blue"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "Who is the red guy from Sonic the Hedgehog?",
+            "Answers": ["Tails", "Sonic the Hedgehog", "Shadow the Hedgehog","Knuckles the Echidna"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "1000(1 + 2) =?",
+            "Answers": ["30.00", "300", "3000","30000"],
             "CorrectAnswer": 2
         },
         {
-            "QuestionText": "What's Jason's favorite foog.",
-            "Answers": ["Erm, Food*", "Sushi", "He doesn't know.","Khao Piak Sen"],
+            "QuestionText": "What is the capital of North Carolina?",
+            "Answers": ["Charlotte", "Durham", "Raleigh","Ashville"],
+            "CorrectAnswer": 2
+        },
+        {
+            "QuestionText": "What is Spongebob's name from Spongebob Squarepants?",
+            "Answers": ["Patrick Star", "Spongebob Squarepants", "Squidward Tentacles","Sheldon Plankton"],
+            "CorrectAnswer": 1
+        },
+        {
+            "QuestionText": "What cow does chocolate milk come from?",
+            "Answers": ["Pink cows", "Bull", "Chocolate cows","It doesn't come from cows."],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "How many watermelons does Johnny have if he has 20 watermelons?",
+            "Answers": ["30", "200", "20","0"],
+            "CorrectAnswer": 2
+        },
+        {
+            "QuestionText": "How many books are there in a trilogy?",
+            "Answers": ["4", "2", "3","At least 4."],
+            "CorrectAnswer": 2
+        },
+        {
+            "QuestionText": "What's the tallest mountain in the world?",
+            "Answers": ["Mount Everest", "Mount Fuji", "Grandfather Mountain","Mount Mountain"],
+            "CorrectAnswer": 0
+        },
+        {
+            "QuestionText": "What is the name of Plankton's wife from Spongebob Squarepants?",
+            "Answers": ["Karen", "Patrick Star", "Mrs. Puff","Mr. Krabs"],
+            "CorrectAnswer": 0
+        },
+        {
+            "QuestionText": "What is the fourth color of the rainbow?",
+            "Answers": ["Red", "Yellow", "Blue","Green"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "What is a group of lions called?",
+            "Answers": ["A pride", "A swarm", "A gaggle","A team"],
+            "CorrectAnswer": 0
+        },
+        {
+            "QuestionText": "Red bull?",
+            "Answers": ["'s are scary", "Gives you wings", "What?","24"],
+            "CorrectAnswer": 1
+        },
+        {
+            "QuestionText": "3(4 + 1)?",
+            "Answers": ["8", "16", "6","15"],
+            "CorrectAnswer": 3
+        },
+        {
+            "QuestionText": "A baby cat is called what?",
+            "Answers": ["A meow", "A kitten", "A puppy",":3"],
             "CorrectAnswer": 1
         }
     ]

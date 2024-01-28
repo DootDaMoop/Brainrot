@@ -7,7 +7,10 @@ public class StudySceneManager : MonoBehaviour
     public static StudySceneManager instance;
     public AttentionSpanManager attentionSpanManager;
     public CameraManager cameraManager;
-    
+    public QuestionManager questionManager;
+    public DistractionManager distractionManager;
+    public SceneSwitcher sceneSwitcher;
+    public Timer timer;
 
     private void Awake() {
         if(instance == null) {
