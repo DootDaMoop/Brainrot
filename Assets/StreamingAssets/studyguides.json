@@ -2,13 +2,13 @@
     "StudyGuideVersion": 1,
     "questions": [
         {
-            "QuestionText": "Question: Test Question",
-            "Answers": ["WRONG", "WRONG", "RIGHT"],
+            "QuestionText": "What's Jason's favorite foog.",
+            "Answers": ["Erm, Food*", "Sushi", "He doesn't know.","Khao Piak Sen"],
             "CorrectAnswer": 2
         },
         {
-            "QuestionText": "Question: BALLS",
-            "Answers": ["FRALLS", "BALLS", "NAHHH"],
+            "QuestionText": "Question: BALLS!!!",
+            "Answers": ["FRALLS", "BALLS", "NAHHH", "BRAAAHHH"],
             "CorrectAnswer":1
         }
     ]

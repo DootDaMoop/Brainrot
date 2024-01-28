@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class QuestionManager : MonoBehaviour {
     public GameObject QuestionPrefab;
     public GameObject QuestionGrid;
+    public ToggleGroup AnswerToggleGroup;
+    public Toggle AnswerTogglePrefab;
     private string file = "studyguides.json";
 
     private void Start() {
@@ -21,8 +23,23 @@ public class QuestionManager : MonoBehaviour {
             string json = File.ReadAllText(path);
             QuestionData questionData = JsonUtility.FromJson<QuestionData>(json);
 
+            int i = 1;
+            // Creates Question and sets Question Text
             foreach(Question question in questionData.questions) {
                 GameObject NewQuestion = Instantiate(QuestionPrefab, QuestionGrid.transform.position, Quaternion.identity, QuestionGrid.transform);
+                QuestionEntry questionEntry = NewQuestion.GetComponent<QuestionEntry>();
+                questionEntry.SetQuestiontext($"{i}. {question.QuestionText}");
+                AnswerToggleGroup = questionEntry.GetToggleGroup();
+                
+                // Creates Answer Choices for Question
+                float pos = 30;
+                foreach(string answer in question.Answers) {
+                    Toggle AnswerToggle = Instantiate(AnswerTogglePrefab, AnswerToggleGroup.transform);
+                    AnswerToggle.GetComponentInChildren<Text>().text = answer;
+                    AnswerToggle.GetComponent<RectTransform>().anchoredPosition = new Vector3(-170,pos,0);
+                    pos -= 35;
+                }
+                i++;
             }
         }
     }

@@ -720,7 +720,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ca30f096ad2726545903474c738dbd03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfacc3ff24cdb45449b91b74f09f6e71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxAttentionSpan: 100
   CurrentAttentionSpan: 0
-  AttentionSpanDecreaseRate: 2
+  AttentionSpanDecreaseRate: 0
   AttentionSpanIncreaseRate: 1
   isOnPhone: 0
   Phone: {fileID: 297135570}
@@ -895,6 +895,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionPrefab: {fileID: 2271665317791395831, guid: a60a0a7da9451ef4f81a672256ff6629, type: 3}
   QuestionGrid: {fileID: 963397742}
+  AnswerToggleGroup: {fileID: 0}
+  AnswerTogglePrefab: {fileID: 142731828861580455, guid: b91160e64b99c9047b0320e1f7d14245, type: 3}
 --- !u!4 &2060482204
 Transform:
   m_ObjectHideFlags: 0
